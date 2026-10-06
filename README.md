@@ -6,4 +6,4 @@ Nama: [Rafika Fadhilah]<br>
 NIM: [2611500030]<br>
 Kelompok: [PWD-TI1J]<br>
 Tahun Ajaran: 2026/2027 semester Gasal<br><br>
-![logo ISBAL](logoisbal.png)
+![logo ISBAL](logoisbal.png)<br><br>

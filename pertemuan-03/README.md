@@ -60,9 +60,20 @@
 ## Pengujian GET dan POST
 
 - Hasil pengujian GET:
-  Berhasil, Data form lengkap, data muncul di URl
-- Contoh URL encoding yang ditemukan: [tuliskan]
-- Hasil pengujian POST: [tuliskan]
+  Berhasil. Data form dapat dikirim menggunakan metode GET dan data yang dimasukkan muncul pada URL sebagai query string.
+
+- Contoh URL encoding yang ditemukan:
+
+  `index.html?nama=Rafika+Fadhilah&email=rafika%40email.com&semester=3&tanggal=2026-10-06&jenis_pesan=pertanyaan&minat=HTML&prodi=TI&pesan=Belajar+HTML`
+
+  Pada URL tersebut:
+  1. Spasi diubah menjadi `+`.
+  2. Karakter `@` pada email diubah menjadi `%40`.
+  3. Data setiap input ditampilkan dalam bentuk `nama=nilai`.
+  4. Antar-data dipisahkan menggunakan tanda `&`.
+
+- Hasil pengujian POST:
+  Form dikirim, tetapi halaman yang sama muncul kembali tanpa menampilkan data. Halaman HTML statis tidak memproses data POST
 
 ## CSS Dasar
 
@@ -73,11 +84,21 @@
 
 ## Pengujian dan Perbaikan
 
-- Galat yang ditemukan: Document checking completed. No errors or warnings to show
-- Penyebab galat: -
-- Perbaikan yang dilakukan: -
+- Galat yang ditemukan:
+  Pada awal pengujian, gambar foto profil tidak tampil pada halaman karena path atau lokasi file gambar belum sesuai dengan pemanggilan pada atribut `src`.
+- Penyebab galat:
+  Path pada `src="img/foto-profil.jpg"` harus sesuai dengan struktur folder. File `foto-profil.jpg` harus berada di dalam folder `img` yang berada satu tingkat dengan `index.html`.
+- Perbaikan yang dilakukan:
+  Memastikan struktur folder dan nama file sudah sesuai, yaitu:
+
+  `pertemuan-03/index.html`
+
+  `pertemuan-03/img/foto-profil.jpg`
+
+  Kemudian menggunakan pemanggilan gambar:
+  `<img src="img/foto-profil.jpg" alt="Foto profil Rafika Fadhilah">`
+
 - Hasil pengujian ulang: tidak ada kesalahan
+  Halaman HTML berhasil dijalankan. Formulir dapat digunakan, validasi HTML berjalan sesuai atribut yang diberikan, tombol Kirim dan Batal berfungsi, serta CSS dasar berhasil diterapkan pada halaman.
 
 ## GitHub Pages
-
-URL: [tempel URL GitHub Pages Pertemuan 3]

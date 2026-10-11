@@ -151,3 +151,20 @@ section {
   margin: 8px 6px 0 0;
   border: 1px solid #003366;
 }
+@media (min-width: 768px) {
+  /* aturan CSS untuk viewport dengan lebar minimal 768px */
+  main {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  nav ul {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+  }
+
+  #contact {
+    grid-column: 1 / -1;
+  }
+}

@@ -168,3 +168,31 @@ section {
     grid-column: 1 / -1;
   }
 }
+/* Tampilan perangkat bergerak */
+@media (max-width: 600px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #home,
+  #about,
+  #contact {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 16px;
+  }
+
+  header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  #home img {
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+  }
+}

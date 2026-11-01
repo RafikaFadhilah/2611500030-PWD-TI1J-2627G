@@ -1,5 +1,7 @@
 <?php
-// P6: PHP dasar dan pemrograman sisi peladen
+//P7
+echo $_GET["nama"];
+
 
 // Bagian 1: Variabel dan konstanta
 $nim = "2611500030";

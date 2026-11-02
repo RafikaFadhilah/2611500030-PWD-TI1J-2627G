@@ -1,10 +1,8 @@
 <?php
 // P7: penggunaan GET
-if (isset($_GET['nama'])) {
-$nama = $_GET['nama'];
-echo "Nama yang diterima: " . htmlspecialchars($nama, ENT_QUOTES, 'UTF-8');
-}
-
+echo $_GET['nama'] . " ";
+echo $_GET['email'] . " ";
+echo $_GET['semester'] . " ";
 
 // Bagian 1: Variabel dan konstanta
 $nim = "2611500030";

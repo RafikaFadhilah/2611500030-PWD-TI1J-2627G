@@ -22,71 +22,53 @@ const prodiInput = document.getElementById("prodi");
 const pesanInput = document.getElementById("pesan");
 
 contactForm.addEventListener("submit", (event) => {
-  //event.preventDefault();
-
   formFeedback.className = "form-feedback-error";
 
   const nama = namaInput.value.trim();
+  let pesanError = "";
+
   if (nama.length < 3 || nama.length > 50) {
-    formFeedback.textContent =
-      "Nama lengkap harus diisi 3 sampai 50 karakter.";
-    return;
+    pesanError = "Nama lengkap harus diisi 3 sampai 50 karakter.";
+  } else {
+    const email = emailInput.value.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const semester = Number(semesterInput.value);
+    const jenisPesan = document.querySelector(
+      'input[name="jenis_pesan"]:checked'
+    );
+    const topikDipilih = document.querySelectorAll(
+      'input[name="minat"]:checked'
+    );
+    const pesan = pesanInput.value.trim();
+
+    if (!emailPattern.test(email)) {
+      pesanError = "Masukkan alamat email yang valid.";
+    } else if (
+      semesterInput.value === "" ||
+      semester < 1 ||
+      semester > 14
+    ) {
+      pesanError = "Semester harus diisi dengan angka 1 sampai 14.";
+    } else if (tanggalInput.value === "") {
+      pesanError = "Tanggal kunjungan harus diisi.";
+    } else if (!jenisPesan) {
+      pesanError = "Pilih jenis pesan.";
+    } else if (topikDipilih.length === 0) {
+      pesanError = "Pilih minimal satu topik yang diminati.";
+    } else if (prodiInput.value === "") {
+      pesanError = "Pilih program studi.";
+    } else if (pesan.length === 0) {
+      pesanError = "Pesan harus diisi.";
+    } else if (pesan.length > 300) {
+      pesanError = "Pesan maksimal 300 karakter.";
+    }
   }
 
-  const email = emailInput.value.trim();
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    formFeedback.textContent = "Masukkan alamat email yang valid.";
+  if (pesanError) {
+    event.preventDefault();
+    formFeedback.textContent = pesanError;
     return;
   }
-
-  const semester = Number(semesterInput.value);
-  if (semesterInput.value === "" || semester < 1 || semester > 14) {
-    formFeedback.textContent =
-      "Semester harus diisi dengan angka 1 sampai 14.";
-    return;
-  }
-
-  if (tanggalInput.value === "") {
-    formFeedback.textContent = "Tanggal kunjungan harus diisi.";
-    return;
-  }
-
-  const jenisPesan = document.querySelector(
-    'input[name="jenis_pesan"]:checked'
-  );
-  if (!jenisPesan) {
-    formFeedback.textContent = "Pilih jenis pesan.";
-    return;
-  }
-
-  const topikDipilih = document.querySelectorAll(
-    'input[name="minat"]:checked'
-  );
-  if (topikDipilih.length === 0) {
-    formFeedback.textContent =
-      "Pilih minimal satu topik yang diminati.";
-    return;
-  }
-
-  if (prodiInput.value === "") {
-    formFeedback.textContent = "Pilih program studi.";
-    return;
-  }
-
-  const pesan = pesanInput.value.trim();
-  if (pesan.length === 0) {
-    formFeedback.textContent = "Pesan harus diisi.";
-    return;
-  }
-
-  if (pesan.length > 300) {
-    formFeedback.textContent = "Pesan maksimal 300 karakter.";
-    return;
-  }
-
-  formFeedback.textContent = "Form berhasil divalidasi.";
-  formFeedback.className = "form-feedback-success";
 });
 
 contactForm.addEventListener("reset", () => {

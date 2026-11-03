@@ -253,65 +253,36 @@ $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
     </section>
 
 <section id="peminjaman">
-    <h2>Permohonan Peminjaman Fasilitas Kampus</h2>
+    <h2>Peminjaman Fasilitas</h2>
 
-    <form action="proses.php" method="POST">
+    <form action="proses-peminjaman.php"
+          method="POST"
+          id="formPeminjaman">
 
-        <!-- Nama Penanggung Jawab -->
-        <label>Nama Penanggung Jawab</label>
-        <input
-            type="text"
-            name="nama"
-            placeholder="Masukkan nama penanggung jawab"
-            required
-        >
+        <label>Nama Mahasiswa:</label>
+        <input type="text" name="nama" required>
 
-        <!-- Jenis Fasilitas -->
-        <label>Jenis Fasilitas</label>
+        <label>NIM:</label>
+        <input type="text" name="nim" required>
+
+        <label>Fasilitas:</label>
         <select name="fasilitas" required>
-            <option value="">-- Pilih Fasilitas --</option>
+            <option value="">Pilih Fasilitas</option>
             <option value="Ruang Kelas">Ruang Kelas</option>
+            <option value="Laboratorium">Laboratorium</option>
             <option value="Aula">Aula</option>
-            <option value="Laboratorium Komputer">
-                Laboratorium Komputer
-            </option>
             <option value="Proyektor">Proyektor</option>
         </select>
 
-        <!-- Tanggal Peminjaman -->
-        <label>Tanggal Peminjaman</label>
-        <input
-            type="date"
-            name="tanggal"
-            required
-        >
+        <label>Tanggal Peminjaman:</label>
+        <input type="date" name="tanggal" required>
 
-        <!-- Durasi Peminjaman -->
-        <label>Durasi Peminjaman (jam)</label>
-        <input
-            type="number"
-            name="durasi"
-            min="1"
-            placeholder="Masukkan durasi dalam jam"
-            required
-        >
+        <label>Keperluan:</label>
+        <textarea name="keperluan" required></textarea>
 
-        <!-- Keperluan Peminjaman -->
-        <label>Keperluan Peminjaman</label>
-        <textarea
-            name="keperluan"
-            placeholder="Tuliskan keperluan peminjaman"
-            required
-        ></textarea>
-
-        <!-- Tombol -->
-        <button type="submit">Kirim</button>
-        <button type="reset">Batal</button>
-
+        <button type="submit">Kirim Peminjaman</button>
     </form>
 </section>
-
-
 
     <!-- BAGIAN CONTACT -->
     <section id="contact">
@@ -602,6 +573,26 @@ $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
 
 
 <script src="script.js"></script>
+<script>
+document.getElementById("formPeminjaman")
+.addEventListener("submit", function(event) {
+
+    let nama = document.querySelector('[name="nama"]').value.trim();
+    let nim = document.querySelector('[name="nim"]').value.trim();
+    let fasilitas = document.querySelector('[name="fasilitas"]').value;
+
+    if (nama === "" || nim === "" || fasilitas === "") {
+        alert("Semua data wajib diisi!");
+        event.preventDefault();
+        return;
+    }
+
+    if (!/^[0-9]+$/.test(nim)) {
+        alert("NIM harus berupa angka!");
+        event.preventDefault();
+    }
+});
+</script>
 
 </body>
 </html>

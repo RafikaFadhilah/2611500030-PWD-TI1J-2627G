@@ -71,6 +71,90 @@ switch ($programStudi) {
 $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
 ?>
 
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST"
+    && ($_POST["form_type"] ?? "") === "peminjaman") {
+
+    // Normalisasi masukan
+    $nama = preg_replace('/\s+/', ' ', trim($_POST["nama"] ?? ""));
+    $fasilitas = trim($_POST["fasilitas"] ?? "");
+    $tanggal = trim($_POST["tanggal"] ?? "");
+    $durasi = trim($_POST["durasi"] ?? "");
+    $keperluan = trim($_POST["keperluan"] ?? "");
+
+    $errors = [];
+
+    // Validasi nama
+    if ($nama === "") {
+        $errors[] = "Nama wajib diisi.";
+    }
+
+    // Validasi fasilitas
+    $daftarFasilitas = [
+        "Ruang Kelas",
+        "Aula",
+        "Laboratorium Komputer",
+        "Proyektor"
+    ];
+
+    if (!in_array($fasilitas, $daftarFasilitas, true)) {
+        $errors[] = "Fasilitas tidak valid.";
+    }
+
+    // Validasi tanggal
+    $tanggalObj = DateTime::createFromFormat("!Y-m-d", $tanggal);
+
+    if (!$tanggalObj || $tanggalObj->format("Y-m-d") !== $tanggal) {
+        $errors[] = "Tanggal tidak valid.";
+    }
+
+    // Validasi durasi
+    if (filter_var($durasi, FILTER_VALIDATE_INT) === false
+        || (int)$durasi < 1) {
+        $errors[] = "Durasi minimal 1 jam.";
+    }
+
+    // Validasi keperluan
+    if ($keperluan === "") {
+        $errors[] = "Keperluan wajib diisi.";
+    }
+
+    if (empty($errors)) {
+
+        // Menyimpan hasil ke session
+        $_SESSION["flash_peminjaman"] = [
+            "status" => "success",
+            "data" => [
+                "nama" => $nama,
+                "fasilitas" => $fasilitas,
+                "tanggal" => $tanggal,
+                "durasi" => $durasi,
+                "keperluan" => $keperluan
+            ]
+        ];
+
+    } else {
+
+        $_SESSION["flash_peminjaman"] = [
+            "status" => "error",
+            "errors" => $errors
+        ];
+    }
+
+    // Post-Redirect-Get (PRG)
+    header("Location: index.php#peminjaman");
+    exit;
+}
+
+// Mengambil pesan session setelah redirect
+$flashPeminjaman = $_SESSION["flash_peminjaman"] ?? null;
+
+// Menghapus pesan sementara
+unset($_SESSION["flash_peminjaman"]);
+?>
+
 <!doctype html>
 <html lang="id">
 
@@ -252,37 +336,146 @@ $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
 
     </section>
 
+
 <section id="peminjaman">
-    <h2>Peminjaman Fasilitas</h2>
+    
 
-    <form action="proses-peminjaman.php"
-          method="POST"
-          id="formPeminjaman">
+<section id="peminjaman">
 
-        <label>Nama Mahasiswa:</label>
-        <input type="text" name="nama" required>
+    <h2>Permohonan Peminjaman Fasilitas Kampus</h2>
 
-        <label>NIM:</label>
-        <input type="text" name="nim" required>
+    <form
+        id="formPeminjaman"
+        action="index.php"
+        method="POST"
+        novalidate>
 
-        <label>Fasilitas:</label>
-        <select name="fasilitas" required>
-            <option value="">Pilih Fasilitas</option>
-            <option value="Ruang Kelas">Ruang Kelas</option>
-            <option value="Laboratorium">Laboratorium</option>
-            <option value="Aula">Aula</option>
-            <option value="Proyektor">Proyektor</option>
-        </select>
+        <input type="hidden" name="form_type" value="peminjaman">
 
-        <label>Tanggal Peminjaman:</label>
-        <input type="date" name="tanggal" required>
+        <div class="form-group">
+            <label for="peminjamanNama">Nama Penanggung Jawab</label>
+            <input
+                class="input-form"
+                type="text"
+                id="peminjamanNama"
+                name="nama"
+                placeholder="Masukkan nama penanggung jawab"
+                required>
+        </div>
 
-        <label>Keperluan:</label>
-        <textarea name="keperluan" required></textarea>
+        <div class="form-group">
+            <label for="peminjamanFasilitas">Jenis Fasilitas</label>
+            <select
+                class="input-form"
+                id="peminjamanFasilitas"
+                name="fasilitas"
+                required>
 
-        <button type="submit">Kirim Peminjaman</button>
+                <option value="">-- Pilih Fasilitas --</option>
+                <option value="Ruang Kelas">Ruang Kelas</option>
+                <option value="Aula">Aula</option>
+                <option value="Laboratorium Komputer">
+                    Laboratorium Komputer
+                </option>
+                <option value="Proyektor">Proyektor</option>
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="peminjamanTanggal">Tanggal Peminjaman</label>
+            <input
+                class="input-form"
+                type="date"
+                id="peminjamanTanggal"
+                name="tanggal"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="peminjamanDurasi">Durasi Peminjaman (jam)</label>
+            <input
+                class="input-form"
+                type="number"
+                id="peminjamanDurasi"
+                name="durasi"
+                min="1"
+                placeholder="Masukkan durasi peminjaman"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="peminjamanKeperluan">Keperluan Peminjaman</label>
+            <textarea
+                class="input-form"
+                id="peminjamanKeperluan"
+                name="keperluan"
+                placeholder="Tuliskan keperluan peminjaman"
+                required></textarea>
+        </div>
+
+        <p id="peminjamanFeedback" aria-live="polite"></p>
+
+        <button type="submit">Kirim</button>
+        <button type="reset">Batal</button>
+
     </form>
+
+    <!-- MENAMPILKAN DATA PEMINJAMAN -->
+
+    <?php if ($flashPeminjaman): ?>
+
+        <?php if ($flashPeminjaman["status"] === "success"): ?>
+
+            <?php $data = $flashPeminjaman["data"]; ?>
+
+            <h3>Data Peminjaman yang Diterima Peladen</h3>
+
+            <p>
+                Nama Penanggung Jawab:
+                <?= htmlspecialchars($data["nama"], ENT_QUOTES, 'UTF-8') ?>
+            </p>
+
+            <p>
+                Jenis Fasilitas:
+                <?= htmlspecialchars($data["fasilitas"], ENT_QUOTES, 'UTF-8') ?>
+            </p>
+
+            <p>
+                Tanggal Peminjaman:
+                <?= htmlspecialchars($data["tanggal"], ENT_QUOTES, 'UTF-8') ?>
+            </p>
+
+            <p>
+                Durasi Peminjaman:
+                <?= htmlspecialchars($data["durasi"], ENT_QUOTES, 'UTF-8') ?> jam
+            </p>
+
+            <p>
+                Keperluan Peminjaman:
+                <?= nl2br(htmlspecialchars($data["keperluan"], ENT_QUOTES, 'UTF-8')) ?>
+            </p>
+
+        <?php else: ?>
+
+            <h3>Data Peminjaman Belum Berhasil Diproses</h3>
+
+            <ul>
+                <?php foreach ($flashPeminjaman["errors"] as $error): ?>
+                    <li>
+                        <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+
+        <?php endif; ?>
+
+    <?php endif; ?>
+
 </section>
+
+
+
 
     <!-- BAGIAN CONTACT -->
     <section id="contact">

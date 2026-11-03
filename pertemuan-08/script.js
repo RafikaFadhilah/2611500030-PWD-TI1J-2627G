@@ -105,3 +105,22 @@ contactForm.addEventListener("reset", () => {
 contactForm.addEventListener("input", () => {
   formFeedback.textContent = "";
 });
+
+document.getElementById("formPeminjaman")
+.addEventListener("submit", function(event) {
+
+    const nama = document.getElementById("nama").value.trim();
+    const fasilitas = document.getElementById("fasilitas").value;
+    const tanggal = document.getElementById("tanggal").value;
+    const durasi = document.getElementById("durasi").value;
+    const keperluan = document.getElementById("keperluan").value.trim();
+
+    if (!nama || !fasilitas || !tanggal ||
+        !durasi || Number(durasi) < 1 || !keperluan) {
+
+        event.preventDefault();
+        alert("Mohon lengkapi semua formulir dengan benar.");
+
+    }
+
+});

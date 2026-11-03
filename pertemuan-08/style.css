@@ -204,103 +204,85 @@ fieldset legend {
 }
 
 .form-feedback-success {
-  color: #2e7d32;
+  color: #312e7d;
 }
 
-/* Footer */
-footer {
-  padding: 14px 20px;
-  margin-top: 20px;
-  color: #ffffff;
-  background-color: #003366;
-  border: 1px solid #00264d;
-  text-align: center;
-}
-
-footer p {
-  margin: 0;
-}
-
-/* Tampilan layar yang lebih lebar */
-@media (min-width: 768px) {
-  nav {
-    margin-top: 16px;
-  }
-
-  nav ul {
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 16px;
-  }
-
-  #navMenu {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .nav-toggle {
-    display: none;
-  }
-
-  main {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  #contact {
-    grid-column: 1 / -1;
-  }
-}
+/* Bagian Peminjaman Fasilitas */
 #peminjaman {
-  padding: 50px 10%;
-  background-color: #f4f6f9;
+  padding: 20px;
+  margin: 0;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
 }
 
 #peminjaman h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #173b65;
+  padding-bottom: 6px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #003366;
+  border-bottom: 2px solid #003366;
 }
 
-#peminjaman form {
-  max-width: 600px;
-  margin: auto;
-  padding: 30px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
+/* Formulir mengikuti pola Kontak */
 #peminjaman label {
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 8px;
+  color: #1f2937;
   font-weight: bold;
 }
 
-#peminjaman input,
-#peminjaman select,
-#peminjaman textarea {
+#peminjaman .form-group {
+  margin: 12px 0;
+}
+
+#peminjaman .input-form {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  max-width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  color: #111827;
+  background-color: #ffffff;
+  border: 1px solid #94a3b8;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
 }
 
 #peminjaman textarea {
-  height: 100px;
+  min-height: 80px;
+  resize: vertical;
 }
 
+/* Tombol mengikuti pola Kontak */
 #peminjaman button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #173b65;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 8px 14px;
+  margin: 8px 6px 0 0;
+  color: #ffffff;
+  background-color: #003366;
+  border: 1px solid #003366;
+  font-weight: bold;
   cursor: pointer;
 }
 
-#peminjaman button[type="reset"] {
-  background: gray;
+#peminjaman button:hover {
+  background-color: #1f4e78;
+}
+
+/* Hasil peminjaman mengikuti tampilan Kontak */
+#peminjaman .hasil-peminjaman {
+  margin-top: 20px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#peminjaman .hasil-peminjaman h3 {
+  margin-bottom: 6px;
+  color: #1f4e78;
+}
+
+#peminjaman .hasil-peminjaman p {
+  padding: 6px 0;
+  margin: 6px 0;
+  line-height: 1.5;
+  border-bottom: 1px solid #e6e6e6;
 }

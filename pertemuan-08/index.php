@@ -440,7 +440,7 @@ $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
                     id="pesan"
                     name="pesan"
                     maxlength="300"
-                    placeholder="Tulis pesan Anda"
+                    placeholder="Tulisa"
                     required><?= htmlspecialchars((string)$pesan, ENT_QUOTES, 'UTF-8') ?></textarea>
 
             </div>

@@ -251,3 +251,56 @@ footer p {
     grid-column: 1 / -1;
   }
 }
+#peminjaman {
+  padding: 50px 10%;
+  background-color: #f4f6f9;
+}
+
+#peminjaman h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #173b65;
+}
+
+#peminjaman form {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+#peminjaman label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+#peminjaman input,
+#peminjaman select,
+#peminjaman textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#peminjaman textarea {
+  height: 100px;
+}
+
+#peminjaman button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #173b65;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#peminjaman button[type="reset"] {
+  background: gray;
+}

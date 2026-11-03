@@ -104,7 +104,9 @@ $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
         <ul id="navMenu">
             <li><a href="#home">Beranda</a></li>
             <li><a href="#about">Tentang</a></li>
+            <li><a href="#peminjaman">Peminjaman Fasilitas</a></li
             <li><a href="#contact">Kontak</a></li>
+       
         </ul>
     </nav>
 </header>
@@ -249,6 +251,66 @@ $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
         </article>
 
     </section>
+
+<section id="peminjaman">
+    <h2>Permohonan Peminjaman Fasilitas Kampus</h2>
+
+    <form action="proses.php" method="POST">
+
+        <!-- Nama Penanggung Jawab -->
+        <label>Nama Penanggung Jawab</label>
+        <input
+            type="text"
+            name="nama"
+            placeholder="Masukkan nama penanggung jawab"
+            required
+        >
+
+        <!-- Jenis Fasilitas -->
+        <label>Jenis Fasilitas</label>
+        <select name="fasilitas" required>
+            <option value="">-- Pilih Fasilitas --</option>
+            <option value="Ruang Kelas">Ruang Kelas</option>
+            <option value="Aula">Aula</option>
+            <option value="Laboratorium Komputer">
+                Laboratorium Komputer
+            </option>
+            <option value="Proyektor">Proyektor</option>
+        </select>
+
+        <!-- Tanggal Peminjaman -->
+        <label>Tanggal Peminjaman</label>
+        <input
+            type="date"
+            name="tanggal"
+            required
+        >
+
+        <!-- Durasi Peminjaman -->
+        <label>Durasi Peminjaman (jam)</label>
+        <input
+            type="number"
+            name="durasi"
+            min="1"
+            placeholder="Masukkan durasi dalam jam"
+            required
+        >
+
+        <!-- Keperluan Peminjaman -->
+        <label>Keperluan Peminjaman</label>
+        <textarea
+            name="keperluan"
+            placeholder="Tuliskan keperluan peminjaman"
+            required
+        ></textarea>
+
+        <!-- Tombol -->
+        <button type="submit">Kirim</button>
+        <button type="reset">Batal</button>
+
+    </form>
+</section>
+
 
 
     <!-- BAGIAN CONTACT -->
@@ -440,7 +502,7 @@ $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
                     id="pesan"
                     name="pesan"
                     maxlength="300"
-                    placeholder="Tulisa"
+                    placeholder="Tulis pesan Anda"
                     required><?= htmlspecialchars((string)$pesan, ENT_QUOTES, 'UTF-8') ?></textarea>
 
             </div>

@@ -1,6 +1,4 @@
-pada p7, saya melakukan:
+# pertemuan-09
 
-1. menyalin artefak P6 untuk menjadi baseline P7
-2. menguji fitur pada P7, hasilnya jalan seperti P6.
-3. meremark event.preventDefault(); pada script.js dan mencoba superglobal $\_GET untuk menangkap nilai yang diisikan pada formulir.
-4. mencoba method post. hasilnya parameter tidak ditampilkan pada url, tetapi menggunakan echo superglobal $\_POST untuk menampilkan nilai dari input form.
+1. menhyalin bahan UTS atau P7 ke P9 yang digunakan sebagai bahan baseline P9, setelah saya menguji pada alamat URL http://localhost/pwd/2611500030-PWD-TI1J-2627G/pertemuan-09/ filter yang sudah dibuat sampai P7 tetap berfungsi dengan baik.
+2.

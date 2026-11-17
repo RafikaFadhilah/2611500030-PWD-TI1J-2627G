@@ -14,6 +14,6 @@
 
 7) Menggunakan fungsi "bersihkan()" untuk mengamankan keluaran teks dengan "htmlspecialchars()".
 
-8) Modularisasi PHPMemisahkan fungsi ke file "fungsi.php".
+8) Modularisasi PHP Memisahkan fungsi ke file "fungsi.php".
 
 9) Memanggil file menggunakan "include" atau "include_once".

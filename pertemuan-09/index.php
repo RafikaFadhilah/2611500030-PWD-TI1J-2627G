@@ -6,7 +6,7 @@ include("fungsi.php");
 echo "Hola <b>Halo</b> Merhaba";
 echo bersihkan("Wanita <b>Imut</b> dan Cantik");
 echo "<script>Bidadari('Merhaba');</script>";
-echo bersihkan("<script>123('Merhaba');</script>");
+echo bersihkan("<script>Berkelas('Merhaba');</script>");
  /* echo "<style>
 * {
     font-weight: bolder;

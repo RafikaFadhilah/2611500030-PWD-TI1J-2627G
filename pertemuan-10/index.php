@@ -103,7 +103,8 @@ switch ($programStudi) {
 		break;
 	default:
 		$fokusProgramStudi = "Belum ditentukan";
-}
+// P9: Larik terindeks untuk menyimpan teknologi web yang dipelajari.
+$teknologiWeb = ["HTML", "CSS", "JavaScript", "PHP", "MySQL"];
 ?>
 <!doctype html>
 <html lang="id">
@@ -191,14 +192,26 @@ switch ($programStudi) {
 					?>
 				</ol>
 
-				<h3>Semester (Perulangan while):</h3>
-				<ol>
-					<?php
-					$nomorSemester = 1;
-					while ($nomorSemester <= 3) {
-						echo "<li>Semester " . $nomorSemester . "</li>";
-						$nomorSemester++; // operator penugasan
-					}
+				<!-- P9: contoh penggunaan array terindeks -->
+<h3>Teknologi Web yang Dipelajari</h3>
+<p>
+Teknologi pertama yang dipelajari:
+<?= bersihkan($teknologiWeb[0]); ?>
+</p>
+<p>Daftar teknologi yang dipelajari:</p>
+<ul>
+<?php foreach ($teknologiWeb as $teknologi): ?>
+<li><?= bersihkan($teknologi); ?></li>
+<?php endforeach; ?>
+</ul>
+<h3>Semester (Perulangan while):</h3>
+<ol>
+<?php
+$nomorSemester = 1;
+while ($nomorSemester <= 3) {
+echo "<li>Semester " . $nomorSemester . "</li>";
+$nomorSemester++;
+}
 					?>
 				</ol>
 			</article>
@@ -295,6 +308,7 @@ switch ($programStudi) {
     <article id="hasilKontak" class="submission-result" aria-live="polite">
         <h3>Data Formulir yang Dikirim</h3>
         <?php
+				
         $labels = [
             "nama"        => "Nama Lengkap",
             "email"       => "Email",
@@ -321,9 +335,28 @@ switch ($programStudi) {
         ?>
             <p><strong><?= tebal(bersihkan($label)) ?>:</strong> <?= $displayValue ?></p>
         <?php endforeach; ?>
-    </article>
+
+<?php
+/*
+$key untuk mendapatkan kunci larik.
+$label untuk mendapatkan nilai larik.
+$key untuk mengakses data formulir pada $_SESSION["form_data"].
+*/
+?>
+<p><strong>Topik yang Diminati:</strong></p>
+<?php if (count($_SESSION["form_data"]["minat"]) > 0): ?>
+<ul>
+<?php foreach ($_SESSION["form_data"]["minat"] as $topik): ?>
+<li><?= bersihkan($topik); ?></li>
+<?php endforeach; ?>
+</ul>
+<?php else: ?>
+<p>Belum ada topik yang dipilih.</p>
 <?php endif; ?>
-			
+<p><strong>Pesan:</strong> <?= nl2br(bersihkan($_SESSION["form_data"]["pesan"])); ?></p>
+</article>
+<?php endif; ?>
+
 		</section>
 	</main>
 
